@@ -7,7 +7,6 @@ import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 
 export default function RegisterPage() {
-  const API_URL = process.env.PY_BACKEND_URL || 'https://smart-tax-backend.onrender.com';
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -27,7 +26,7 @@ const handleSubmit = async (e) => {
   }
 
   try {
-    const res = await fetch(`${API_URL}/api/insert_employee`, {
+    const res = await fetch(`https://smart-tax-backend.onrender.com/api/insert_employee`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
