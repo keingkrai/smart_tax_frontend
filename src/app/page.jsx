@@ -34,15 +34,21 @@ export default function Home() {
     const [success, setSuccess] = useState(null);
     const [saved, setSaved] = useState([]);
 
-    const employee = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
-    const employee_id = employee ? JSON.parse(employee).id : null;
+    const [employee_id, setEmployeeId] = useState(null);
 
-    if(!employee){
-      window.location.href = '/login';
-    }
+    // Effect for authentication and redirect
+    useEffect(() => {
+        const employeeData = localStorage.getItem('token');
+        if (employeeData) {
+            setEmployeeId(JSON.parse(employeeData).id);
+        } else {
+            // Redirect to login if no token found
+            window.location.href = '/login';
+        }
+    }, []); // Empty dependency array means this runs once on the client side
 
     const fetchDocuments = async () => {
-        if (!employee_id) return;
+        if (!employee_id) return; // Guard against running before employee_id is set
         try {
             const res = await fetch(`http://127.0.0.1:8000/api/get_all_document?employee_id=${employee_id}`);
             const data = await res.json();
@@ -56,8 +62,11 @@ export default function Home() {
         }
     };
 
+    // Effect for fetching documents, runs when employee_id changes
     useEffect(() => {
-        fetchDocuments();
+        if (employee_id) { // Only fetch if employee_id is available
+            fetchDocuments();
+        }
     }, [employee_id]);
 
     const onFileSelected = (f) => {
