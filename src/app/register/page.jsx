@@ -27,7 +27,7 @@ const handleSubmit = async (e) => {
   }
 
   try {
-    const res = await fetch('${API_URL}/api/insert_employee', {
+    const res = await fetch(`${API_URL}/api/insert_employee`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
