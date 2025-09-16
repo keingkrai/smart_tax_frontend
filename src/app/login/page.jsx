@@ -7,7 +7,6 @@ import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 
 export default function LoginPage() {
-  const API_URL = process.env.PY_BACKEND_URL || 'https://smart-tax-backend.onrender.com';
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
@@ -26,7 +25,7 @@ export default function LoginPage() {
     }
 
     try {
-      const res = await fetch(`${API_URL}/api/get_pre_employees?email=${encodeURIComponent(email)}&password_hash=${encodeURIComponent(password)}`, {
+      const res = await fetch(`https://smart-tax-backend.onrender.com/api/get_pre_employees?email=${encodeURIComponent(email)}&password_hash=${encodeURIComponent(password)}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
