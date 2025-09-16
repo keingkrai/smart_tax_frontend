@@ -26,6 +26,7 @@ const normalizePages = (result) => {
 };
 
 export default function Home() {
+    const API_URL = process.env.PY_BACKEND_URL || 'https://smart-tax-backend.onrender.com';
     const [file, setFile] = useState(null);
     const [previewUrl, setPreviewUrl] = useState(null);
     const [uploading, setUploading] = useState(false);
@@ -50,7 +51,7 @@ export default function Home() {
     const fetchDocuments = async () => {
         if (!employee_id) return; // Guard against running before employee_id is set
         try {
-            const res = await fetch(`http://127.0.0.1:8000/api/get_all_document?employee_id=${employee_id}`);
+            const res = await fetch(`${API_URL}/api/get_all_document?employee_id=${employee_id}`);
             const data = await res.json();
             if (data?.ok && Array.isArray(data.documents)) {
                 setSaved(data.documents);
@@ -93,7 +94,7 @@ export default function Home() {
             const fd = new FormData();
             fd.append('file', file);
             
-            const res = await fetch('http://127.0.0.1:8000/api/process', {
+            const res = await fetch('${API_URL}/api/process', {
                 method: 'POST',
                 body: fd
             });
@@ -129,7 +130,7 @@ export default function Home() {
 
         try {
             const res = await fetch(
-                `http://127.0.0.1:8000/api/insert_document?employee_id=${employee_id}&member_name=default`, {
+                `${API_URL}/api/insert_document?employee_id=${employee_id}&member_name=default`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -156,7 +157,7 @@ export default function Home() {
         if (!confirm('Are you sure you want to delete this document?')) return;
 
         try {
-            const res = await fetch(`http://127.0.0.1:8000/api/delete_document?document_id=${docId}`, {
+            const res = await fetch(`${API_URL}/api/delete_document?document_id=${docId}`, {
                 method: 'DELETE',
             });
             const data = await res.json();
