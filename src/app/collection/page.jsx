@@ -25,6 +25,7 @@ const StatusBadge = ({ text }) => {
 };
 
 function CollectionPage() {
+  const API_URL = process.env.PY_BACKEND_URL || 'https://smart-tax-backend.onrender.com';
   const [files, setFiles] = useState([]);
   const [filteredFiles, setFilteredFiles] = useState([]);
   const [categories, setCategories] = useState(['All']);
@@ -49,7 +50,7 @@ function CollectionPage() {
         return;
     }
     try {
-      const res = await fetch(`http://127.0.0.1:8000/api/get_all_document?employee_id=${employee_id}`,{
+      const res = await fetch(`${API_URL}/api/get_all_document?employee_id=${employee_id}`,{
         method: 'GET'
       });
       if (!res.ok) {
