@@ -49,7 +49,7 @@ function CollectionPage() {
         return;
     }
     try {
-      const res = await fetch(`https://smart-tax-backend.onrender.com/api/get_all_document?employee_id=${employee_id}`,{
+      const res = await fetch(`https://processtaxocr-production.up.railway.app//api/get_all_document?employee_id=${employee_id}`,{
         method: 'GET'
       });
       if (!res.ok) {
@@ -62,7 +62,7 @@ function CollectionPage() {
           name: record.result_json?.title || record.original_name || `Doc ${record.id}`,
           category: record.result_json?.seller || 'Uncategorized',
           year: record.doc_date ? new Date(record.doc_date).getFullYear() : 'Uncategorized',
-          imageUrl: `https://smart-tax-backend.onrender.com/thumb_text?text=${encodeURIComponent(record.result_json?.title || 'Doc')}`,
+          imageUrl: `https://processtaxocr-production.up.railway.app//thumb_text?text=${encodeURIComponent(record.result_json?.title || 'Doc')}`,
           details: record.result_json
         }));
         setFiles(formattedFiles);
@@ -196,7 +196,7 @@ function CollectionPage() {
                         title="Download Original"
                         onClick={() => {
                           if (file.original_name) {
-                            window.location.href = `https://smart-tax-backend.onrender.com/download/${encodeURIComponent(file.original_name)}`;
+                            window.location.href = `https://processtaxocr-production.up.railway.app/download/${encodeURIComponent(file.original_name)}`;
                           } else {
                             alert('Original file name not available.');
                           }
