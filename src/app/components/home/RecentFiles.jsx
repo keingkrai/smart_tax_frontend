@@ -37,6 +37,7 @@ export default function RecentFiles({
     handleDelete
 }) {
     const [error, setError] = useState(null);
+    const API_URL = process.env.PY_BACKEND_URL || 'https://smart-tax-backend.onrender.com';
 
     return (
         <div>
@@ -96,7 +97,7 @@ export default function RecentFiles({
                                 onClick = {
                                     () => {
                                         if (rec.original_name) {
-                                            window.location.href = `http://127.0.0.1:8000/download/${encodeURIComponent(rec.original_name)}`;
+                                            window.location.href = `${API_URL}/download/${encodeURIComponent(rec.original_name)}`;
                                         } else {
                                             alert('Original file name not available.');
                                         }
