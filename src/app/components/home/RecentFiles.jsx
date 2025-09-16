@@ -60,7 +60,7 @@ export default function RecentFiles({
                         className = "bg-white rounded-xl overflow-hidden shadow-sm border border-gray-200 hover:shadow-lg transition-shadow duration-300 group" >
                         <div className = "relative w-full h-40" >
                         <Image src = {
-                            `http://127.0.0.1:8000/thumb_text?text=${encodeURIComponent(rec.result_json?.title || 'Doc')}`
+                            `https://processtaxocr-production.up.railway.app/thumb_text?text=${encodeURIComponent(rec.result_json?.title || 'Doc')}`
                         }
                         alt = {
                             rec.result_json?.title || 'Document'
