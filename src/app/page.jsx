@@ -50,7 +50,7 @@ export default function Home() {
     const fetchDocuments = async () => {
         if (!employee_id) return; // Guard against running before employee_id is set
         try {
-            const res = await fetch(`https://processtaxocr-production.up.railway.app//api/get_all_document?employee_id=${employee_id}`);
+            const res = await fetch(`https://processtaxocr-production.up.railway.app/api/get_all_document?employee_id=${employee_id}`);
             const data = await res.json();
             if (data?.ok && Array.isArray(data.documents)) {
                 setSaved(data.documents);
@@ -93,7 +93,7 @@ export default function Home() {
             const fd = new FormData();
             fd.append('file', file);
             
-            const res = await fetch(`https://processtaxocr-production.up.railway.app//api/process`, {
+            const res = await fetch(`https://processtaxocr-production.up.railway.app/api/process`, {
                 method: 'POST',
                 body: fd
             });
@@ -129,7 +129,7 @@ export default function Home() {
 
         try {
             const res = await fetch(
-                `https://processtaxocr-production.up.railway.app//api/insert_document?employee_id=${employee_id}&member_name=default`, {
+                `https://processtaxocr-production.up.railway.app/api/insert_document?employee_id=${employee_id}&member_name=default`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -156,7 +156,7 @@ export default function Home() {
         if (!confirm('Are you sure you want to delete this document?')) return;
 
         try {
-            const res = await fetch(`https://processtaxocr-production.up.railway.app//api/delete_document?document_id=${docId}`, {
+            const res = await fetch(`https://processtaxocr-production.up.railway.app/api/delete_document?document_id=${docId}`, {
                 method: 'DELETE',
             });
             const data = await res.json();
