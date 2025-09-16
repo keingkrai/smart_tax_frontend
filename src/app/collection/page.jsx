@@ -25,7 +25,6 @@ const StatusBadge = ({ text }) => {
 };
 
 function CollectionPage() {
-  const API_URL = process.env.PY_BACKEND_URL || 'https://smart-tax-backend.onrender.com';
   const [files, setFiles] = useState([]);
   const [filteredFiles, setFilteredFiles] = useState([]);
   const [categories, setCategories] = useState(['All']);
@@ -50,7 +49,7 @@ function CollectionPage() {
         return;
     }
     try {
-      const res = await fetch(`${API_URL}/api/get_all_document?employee_id=${employee_id}`,{
+      const res = await fetch(`https://smart-tax-backend.onrender.com/api/get_all_document?employee_id=${employee_id}`,{
         method: 'GET'
       });
       if (!res.ok) {
@@ -63,7 +62,7 @@ function CollectionPage() {
           name: record.result_json?.title || record.original_name || `Doc ${record.id}`,
           category: record.result_json?.seller || 'Uncategorized',
           year: record.doc_date ? new Date(record.doc_date).getFullYear() : 'Uncategorized',
-          imageUrl: `http://127.0.0.1:8000/thumb_text?text=${encodeURIComponent(record.result_json?.title || 'Doc')}`,
+          imageUrl: `https://smart-tax-backend.onrender.com/thumb_text?text=${encodeURIComponent(record.result_json?.title || 'Doc')}`,
           details: record.result_json
         }));
         setFiles(formattedFiles);
@@ -197,7 +196,7 @@ function CollectionPage() {
                         title="Download Original"
                         onClick={() => {
                           if (file.original_name) {
-                            window.location.href = `http://127.0.0.1:8000/download/${encodeURIComponent(file.original_name)}`;
+                            window.location.href = `https://smart-tax-backend.onrender.com/download/${encodeURIComponent(file.original_name)}`;
                           } else {
                             alert('Original file name not available.');
                           }
