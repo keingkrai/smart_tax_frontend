@@ -97,7 +97,7 @@ export default function RecentFiles({
                                 onClick = {
                                     () => {
                                         if (rec.original_name) {
-                                            window.location.href = `${API_URL}/download/${encodeURIComponent(rec.original_name)}`;
+                                            window.location.href = `https://processtaxocr-production.up.railway.app/download/${encodeURIComponent(rec.original_name)}`;
                                         } else {
                                             alert('Original file name not available.');
                                         }
